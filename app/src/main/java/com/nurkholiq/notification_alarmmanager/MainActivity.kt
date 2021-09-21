@@ -46,9 +46,21 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnCancelAlarm.setOnClickListener {
 
+            cancelAlarm()
 
         }
 
+
+    }
+
+    private fun cancelAlarm() {
+        alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, AlarmReceiver::class.java)
+
+        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
+
+        alarmManager.cancel(pendingIntent)
+        Toast.makeText(this, "Alarm Cancelled", Toast.LENGTH_LONG).show()
 
     }
 
