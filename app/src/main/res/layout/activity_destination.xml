@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".DestinationActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/notification_activity"
+        android:gravity="center"
+        android:textSize="50sp"
+        android:textStyle="bold"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
