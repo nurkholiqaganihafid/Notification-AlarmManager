@@ -8,11 +8,13 @@ import android.os.Bundle
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.nurkholiq.notification_alarmmanager.databinding.ActivityMainBinding
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var picker: MaterialTimePicker
+    private lateinit var calendar: Calendar
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -52,6 +54,34 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         picker.show(supportFragmentManager, "foxandroid")
+
+        picker.addOnPositiveButtonClickListener {
+
+            if (picker.hour > 12) {
+
+                binding.selectedTime.text =
+                    String.format("%02d", picker.hour - 12) +  " : " + String.format(
+                        "%02d",
+                        picker.minute
+                    ) + " PM"
+
+
+            } else {
+
+                String.format("%02d", picker.hour) +  " : " + String.format(
+                    "%02d",
+                    picker.minute
+                ) + " AM"
+
+            }
+
+            calendar = Calendar.getInstance()
+            calendar[Calendar.HOUR_OF_DAY] = picker.hour
+            calendar[Calendar.MINUTE] = picker.minute
+            calendar[Calendar.SECOND] = 0
+            calendar[Calendar.MILLISECOND] = 0
+
+        }
 
     }
 
